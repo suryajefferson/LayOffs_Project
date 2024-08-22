@@ -314,9 +314,14 @@ After a thorough review of the data column by column, it was determined that dat
    - **Problem 1:** Dates are stored as strings.
    - *solution* : Convert values and column type to DATE format
 
-**1. Cleaning the `industry` Column**
 
-*Problem 1:* NULL values and potential Blanks
+<details>
+<summary><h4><strong>1. Cleaning the `industry` Column</strong></h4></summary>
+
+
+<details>
+<summary><strong>Problem 1: NULL values and potential Blanks</strong></summary>
+
 
 *solution* : Fill those NULL values and Blanks
 
@@ -497,7 +502,12 @@ WHERE company like 'Airbnb%';
 
 </details>
 
-*Problem 2:* Variations in "Crypto" entries
+</details>
+
+
+<details>
+<summary><strong>Problem 2: Variations in "Crypto" entries</strong></summary>
+
 
 *solution* : Change values that start with 'Crypto' to 'Crypto'
 
@@ -536,8 +546,19 @@ WHERE industry like 'Crypto%';
 ```
 
 ###### All the elements starting with Crypto now will be remaned as "Crypto"
-##### 2. Cleaning `Country` Column 
-*Problem 1:* Variations like "United States" and "United States." (with a period)
+
+</details>
+
+</details>
+
+<details>
+<summary><h4><strong>2. Cleaning `Country` Column </strong></h4></summary>
+
+
+<details>
+<summary><strong>Problem 1: Variations like "United States" and "United States." (with a period)</strong></summary>
+
+
 
 *solution* : Remove '.'
 - Take a look at the distinct countries
@@ -700,9 +721,19 @@ ORDER BY 1;
 
 </details>
 
+</details>
 
-##### 3 Cleaning `Percentage_laid_off` column
-*Problem 1:* Values are stored as strings.
+</details>
+
+</details>
+
+<details>
+<summary><h4><strong>3 Cleaning `Percentage_laid_off` column</strong></h4></summary>
+
+<details>
+<summary><strong>Problem 1: Values are stored as strings</strong></summary>
+
+
 
 *solution* : Convert values and column type to NUMERIC
 - Check the percentage_laid_off column type
@@ -752,9 +783,18 @@ WHERE table_schema = 'public'
 
 </details>
 
+</details>
 
-##### 4 Cleaning `Date` column
-**Problem 1:** Dates are stored as strings.
+</details>
+
+<details>
+<summary><h4><strong>4 Cleaning `Date` column</strong></h4></summary>
+
+
+<details>
+<summary><strong>Problem 1: Dates are stored as strings.</strong></summary>
+
+
 
 *solution* : Convert values and column type to DATE format
 - Check the date column type
@@ -815,6 +855,8 @@ WHERE table_schema = 'public'
 
 </details>
 
+</details>
+
 <details>
 <summary><h3><strong>4. Handling Null Values</strong></h3></summary>
 
@@ -825,6 +867,7 @@ WHERE table_schema = 'public'
 
 <details>
 <summary><h3><strong>5. Removing Unnecessary Rows and Columns</strong></h3></summary>
+
 
 
 - Take a look at the NULL values in Total laid off and Percentage laid off
@@ -877,6 +920,7 @@ DROP COLUMN row_num;
 ```
 
 </details>
+   
 
 <details>
 <summary><h3><strong>Data Ready for EDA</strong></h3></summary>
@@ -913,8 +957,9 @@ LIMIT 5;
 <details>
 <summary><h1><strong>Phase 3: EDA</strong></h1></summary>
 
+<details>
+<summary><h3><strong>1. Basic Query</strong></h3></summary>
 
-### 1. Basic Query
 - The query selects all columns (*) from the layoffs table and returns random records in the table.
 
 ``` sql
@@ -952,8 +997,11 @@ LIMIT 5;
 
 </details>
 
+</details>
 
-### 2. Finding Maximum Values
+<details>
+<summary><h3><strong>2. Finding Maximum Values</strong></h3></summary>
+
 
 - The query calculates the maximum number of layoffs that occurred in a single day (maximum_laid_off_per_day) and the maximum percentage of layoffs, scaling it by 100 (maximum_percentage_laid_off).
 
@@ -991,9 +1039,11 @@ FROM layoffs;
 
 </details>
 
+</details>
 
 
-### 3. Filtering by Maximum Percentage Laid Off
+<details>
+<summary><h3><strong>3. Filtering by Maximum Percentage Laid Off</strong></h3></summary>
 
 - The query selects records where the percentage_laid_off is equal to 100% (1). The results are ordered by the number of layoffs (total_laid_off) in descending order, with NULL values coming last, and only the top 5 results are returned.
 
@@ -1031,7 +1081,13 @@ LIMIT 5;
 
 </details>
 
-### 4. Top Companies by Funds Raised
+
+</details>
+
+
+<details>
+<summary><h3><strong> 4. Top Companies by Funds Raised</strong></h3></summary>
+
 - The query selects all records from the layoffs table, ordering them by the amount of funds raised (funds_raised_millions) in descending order, with NULL values placed last. It returns the top 5 records.
 ``` sql
 SELECT *
@@ -1067,8 +1123,13 @@ LIMIT 5;
 
 </details>
 
+</details>
 
-### 5. Top Companies by Total Layoffs
+
+<details>
+<summary><h3><strong>5. Top Companies by Total Layoffs</strong></h3></summary>
+
+
 
 - This query groups the records by company and calculates the total number of layoffs per company (Sum_of_laid_offs). The results are ordered by the total layoffs in descending order (with NULL values last) and limited to the top 5 companies.
 ``` sql
@@ -1105,7 +1166,12 @@ LIMIT 5 ;
 </details>
 
 
-### 6. Total Layoffs by Industry
+</details>
+
+
+<details>
+<summary><h3><strong>6. Total Layoffs by Industry</strong></h3></summary>
+
 - This query groups the records by industry and calculates the total number of layoffs per industry (Sum_of_laid_offs). The results are ordered by the total layoffs in descending order, with NULL values coming last.
 ``` sql
 SELECT industry, SUM(total_laid_off) AS Sum_of_laid_offs
@@ -1140,8 +1206,12 @@ LIMIT 5;
 
 </details>
 
+</details>
 
-### 7. Total Layoffs by Year
+
+<details>
+<summary><h3><strong>7. Total Layoffs by Year</strong></h3></summary>
+
 
 - This query extracts the year from the date column and groups the records by year, calculating the total number of layoffs per year. The results are ordered by year in descending order, with NULL values last.
 ``` sql
@@ -1177,7 +1247,12 @@ ORDER BY 1 DESC NULLS LAST;
 
 </details>
 
-### 8. Total Layoffs by Company Stage
+</details>
+
+
+<details>
+<summary><h3><strong>8. Total Layoffs by Company Stage</strong></h3></summary>
+
 - This query groups the records by the company stage (e.g., startup, growth) and calculates the total number of layoffs per stage. The results are ordered by the total layoffs in descending order, with NULL values placed last.
 
 ``` sql
@@ -1223,7 +1298,12 @@ ORDER BY 2 DESC NULLS LAST;
  
 </details>
 
-### 9. Total Layoffs by Month and Year
+</details>
+
+<details>
+<summary><h3><strong>9. Total Layoffs by Month and Year</strong></h3></summary>
+
+
 - This query extracts the year and month from the date column in the format YYYY-MM and groups the records by this year_month. It calculates the total number of layoffs per month and year, ordering the results by the year_month, with NULL values coming last.
 
 ``` sql
@@ -1293,7 +1373,12 @@ ORDER BY 1 NULLS LAST;
 
 </details>
 
-### 10. Rolling Total of Layoffs by Month
+</details>
+
+
+<details>
+<summary><h3><strong>10. Rolling Total of Layoffs by Month</strong></h3></summary>
+
 
 Explanation:
 
@@ -1376,8 +1461,13 @@ FROM cte;
 
 </details>
 
+</details>
 
-### 11. Top 5 Companies by Layoffs per Year
+
+<details>
+<summary><h3><strong>11. Top 5 Companies by Layoffs per Year</strong></h3></summary>
+
+
 
 - Step 1 (CTE ccc): A CTE ccc is created to calculate the total number of layoffs per company per year.
 
@@ -1454,6 +1544,7 @@ ORDER BY year, ranking;
 
 </details>
 
+</details>
 
 </details>
 
