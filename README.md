@@ -1,4 +1,4 @@
-## Abstract
+# Abstract
 
 This project analyzes global job layoffs using a comprehensive dataset encompassing various companies, industries, and time periods. The primary objective was to uncover trends and patterns in layoffs, including the impact on different sectors, companies, and temporal fluctuations. Through SQL queries and data aggregation, the analysis reveals key insights into which companies and industries were most affected, the relationship between funding and layoffs, and the trends over time. This project highlights the importance of data cleaning and optimization in SQL for accurate and meaningful analysis, providing a detailed view of the dynamics of job layoffs across the global job market.
 # About the Data
@@ -1222,7 +1222,7 @@ ORDER BY 1 DESC NULLS LAST;
 ```
 
 <details>
-<summary><h4><strong>Click to view Results Insights</strong></h4></summary>
+<summary><h4><strong>Click to view Results</strong></h4></summary>
 
 
 | year | sum_of_laid_offs |
@@ -1239,7 +1239,7 @@ ORDER BY 1 DESC NULLS LAST;
 
 
 <details>
-<summary><h4><strong>Click to view Results Insights</strong></h4></summary>
+<summary><h4><strong>Click to view Insights</strong></h4></summary>
 
 
 **Annual Layoff Trends**: Layoffs peaked in 2022 with a significant decline in 2023. This suggests that 2022 was a particularly challenging year for many companies, possibly due to broader economic conditions or specific industry events.
