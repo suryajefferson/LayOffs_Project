@@ -59,14 +59,21 @@ For my detailed study of the data analyst job market, I used several important t
 <details>
 <summary><h1><strong>Phase 1: Database Setup</strong></h1></summary>
 
+<details>
+<summary><h3><strong>1. Creating the Database</strong></h3></summary>
 
-### 1. Creating the Database
+
 
 ``` sql 
 CREATE DATABASE World_Layoffs;
 ```
 
-### 2. Creating the Table
+</details>
+
+
+<details>
+<summary><h3><strong>2. Creating the Table</strong></h3></summary>
+
 
 ``` sql 
 -- Create layoffs table 
@@ -87,15 +94,17 @@ CREATE TABLE public.layoffs_original
 -- Set ownership of the tables to the postgres user
 ALTER TABLE public.layoffs_original OWNER to postgres;
 ```
+</details>
 
-### 3. Loading the Data
-
+<details>
+<summary><h3><strong>3. Loading the Data</strong></h3></summary>
 
 - In PostgresSQL > PgAdmin4 > PSQL Tool, using these commands to insert data from csv files to database
 ``` sql 
 \copy layoffs FROM 'D:\SQL\LayOffs\Files\layoffs.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', ENCODING 'UTF8', NULL 'NULL');
 ```
 
+</details>
 
 </details>
 
@@ -104,7 +113,7 @@ ALTER TABLE public.layoffs_original OWNER to postgres;
 <summary><h1><strong>Phase 2: Data Cleaning</strong></h1></summary>
 
 <details>
-<summary><h4><strong>1. Copying the Original Table</strong></h4></summary>
+<summary><h3><strong>1. Copying the Original Table</strong></h3></summary>
 
 
 - It is advisable to make changes to a copy of the table rather than the original
@@ -122,7 +131,7 @@ INSERT INTO layoffs(
 
 
 <details>
-<summary><h4><strong>2. Removing Duplicates</strong></h4></summary>
+<summary><h3><strong>2. Removing Duplicates</strong></h3></summary>
 
 
 **Identifying Duplicates** 
@@ -280,7 +289,7 @@ WHERE row_num > 1;
 </details>
 
 <details>
-<summary><h4><strong>3. Standardizing Data</strong></h4></summary>
+<summary><h3><strong>3. Standardizing Data</strong></h3></summary>
 
 
 
@@ -807,7 +816,7 @@ WHERE table_schema = 'public'
 </details>
 
 <details>
-<summary><h4><strong>4. Handling Null Values</strong></h4></summary>
+<summary><h3><strong>4. Handling Null Values</strong></h3></summary>
 
 
 - Leave null values in total_laid_off, percentage_laid_off, and funds_raised_millions columns, as they may be useful for calculations during EDA.
@@ -815,7 +824,7 @@ WHERE table_schema = 'public'
 </details>
 
 <details>
-<summary><h4><strong>5. Removing Unnecessary Rows and Columns</strong></h4></summary>
+<summary><h3><strong>5. Removing Unnecessary Rows and Columns</strong></h3></summary>
 
 
 - Take a look at the NULL values in Total laid off and Percentage laid off
@@ -870,7 +879,7 @@ DROP COLUMN row_num;
 </details>
 
 <details>
-<summary><h4><strong>Data Ready for EDA</strong></h4></summary>
+<summary><h3><strong>Data Ready for EDA</strong></h3></summary>
 
 
 ``` sql
