@@ -1,4 +1,3 @@
-
 ## Abstract
 
 This project analyzes global job layoffs using a comprehensive dataset encompassing various companies, industries, and time periods. The primary objective was to uncover trends and patterns in layoffs, including the impact on different sectors, companies, and temporal fluctuations. Through SQL queries and data aggregation, the analysis reveals key insights into which companies and industries were most affected, the relationship between funding and layoffs, and the trends over time. This project highlights the importance of data cleaning and optimization in SQL for accurate and meaningful analysis, providing a detailed view of the dynamics of job layoffs across the global job market.
@@ -104,8 +103,10 @@ ALTER TABLE public.layoffs_original OWNER to postgres;
 <details>
 <summary><h1><strong>Phase 2: Data Cleaning</strong></h1></summary>
 
+<details>
+<summary><h4><strong>1. Copying the Original Table</strong></h4></summary>
 
-### 1. Copying the Original Table
+
 - It is advisable to make changes to a copy of the table rather than the original
 
 
@@ -117,9 +118,12 @@ CREATE TABLE layoffs(
 INSERT INTO layoffs(
     SELECT * FROM layoffs_raw);
 ```
+</details>
 
 
-### 2. Removing Duplicates
+<details>
+<summary><h4><strong>2. Removing Duplicates</strong></h4></summary>
+
 
 **Identifying Duplicates** 
 - First, identify duplicates by assigning a row number to each row based on key columns
@@ -273,7 +277,12 @@ WHERE row_num > 1;
 
 </details>
 
-###  3. Standardizing Data
+</details>
+
+<details>
+<summary><h4><strong>3. Standardizing Data</strong></h4></summary>
+
+
 
 After a thorough review of the data column by column, it was determined that data cleaning is necessary for some columns
 
@@ -682,7 +691,8 @@ ORDER BY 1;
 
 </details>
 
-##### 4 Cleaning `Percentage_laid_off` column
+
+##### 3 Cleaning `Percentage_laid_off` column
 *Problem 1:* Values are stored as strings.
 
 *solution* : Convert values and column type to NUMERIC
@@ -734,7 +744,7 @@ WHERE table_schema = 'public'
 </details>
 
 
-##### 3 Cleaning `Date` column
+##### 4 Cleaning `Date` column
 **Problem 1:** Dates are stored as strings.
 
 *solution* : Convert values and column type to DATE format
@@ -794,9 +804,19 @@ WHERE table_schema = 'public'
 
 </details>
 
-##### 4. Handling Null Values
+</details>
+
+<details>
+<summary><h4><strong>4. Handling Null Values</strong></h4></summary>
+
+
 - Leave null values in total_laid_off, percentage_laid_off, and funds_raised_millions columns, as they may be useful for calculations during EDA.
-##### 5. Removing Unnecessary Rows and Columns
+
+</details>
+
+<details>
+<summary><h4><strong>5. Removing Unnecessary Rows and Columns</strong></h4></summary>
+
 
 - Take a look at the NULL values in Total laid off and Percentage laid off
 
@@ -846,7 +866,11 @@ WHERE   total_laid_off IS Null AND percentage_laid_off IS NULL;
 ALTER TABLE layoffs
 DROP COLUMN row_num;
 ```
-#### Data Ready for EDA
+
+</details>
+
+<details>
+<summary><h4><strong>Data Ready for EDA</strong></h4></summary>
 
 
 ``` sql
@@ -875,6 +899,7 @@ LIMIT 5;
 
 </details>
 
+</details>
 <br><br><br>
 <details>
 <summary><h1><strong>Phase 3: EDA</strong></h1></summary>
